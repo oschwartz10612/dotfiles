@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <property name="dark-mode" type="bool" value="false"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=8;x=1920;y=2146"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="icon-size" type="uint" value="16"/>
+      <property name="size" type="uint" value="26"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="1"/>
+        <value type="int" value="2"/>
+        <value type="int" value="3"/>
+        <value type="int" value="4"/>
+        <value type="int" value="5"/>
+        <value type="int" value="6"/>
+        <value type="int" value="8"/>
+        <value type="int" value="10"/>
+        <value type="int" value="11"/>
+        <value type="int" value="12"/>
+        <value type="int" value="13"/>
+        <value type="int" value="14"/>
+      </property>
+      <property name="autohide-behavior" type="uint" value="2"/>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="plugin-1" type="string" value="applicationsmenu"/>
+    <property name="plugin-2" type="string" value="tasklist">
+      <property name="grouping" type="uint" value="1"/>
+    </property>
+    <property name="plugin-3" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-4" type="string" value="pager"/>
+    <property name="plugin-5" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-6" type="string" value="systray">
+      <property name="square-icons" type="bool" value="true"/>
+      <property name="known-legacy-items" type="array">
+        <value type="string" value="flameshot"/>
+        <value type="string" value="system-config-printer"/>
+        <value type="string" value="networkmanager applet"/>
+        <value type="string" value="ibus panel"/>
+        <value type="string" value="com.cisco.secureclient.gui"/>
+        <value type="string" value="network"/>
+      </property>
+      <property name="known-items" type="array">
+        <value type="string" value="GoldenDict"/>
+        <value type="string" value="vlc"/>
+        <value type="string" value="obs"/>
+        <value type="string" value="blueman"/>
+        <value type="string" value="remmina-icon"/>
+        <value type="string" value="CopyQ_copyq"/>
+        <value type="string" value="flameshot"/>
+        <value type="string" value="nm-applet"/>
+      </property>
+    </property>
+    <property name="plugin-8" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="show-notifications" type="bool" value="true"/>
+      <property name="mpris-players" type="string" value="chromium.instance14106;firefox.instance2272;firefox.instance2416;firefox.instance_1_1174;firefox.instance_1_1640;firefox.instance_1_188;firefox.instance_1_2205;firefox.instance_1_2395;firefox.instance_1_2624;firefox.instance_1_2762;firefox.instance_1_2892;firefox.instance_1_3600;firefox.instance_1_3634;firefox.instance_1_5034;firefox.instance_1_55;firefox.instance_1_56;firefox.instance_1_569;firefox.instance_1_57;firefox.instance_1_58;firefox.instance_1_62;firefox.instance_1_65;firefox.instance_1_69;firefox.instance_1_73;firefox.instance_1_75;firefox.instance_1_82;firefox.instance_1_93;firefox.instance_1_986;vlc"/>
+    </property>
+    <property name="plugin-10" type="string" value="notification-plugin"/>
+    <property name="plugin-11" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-12" type="string" value="clock">
+      <property name="digital-date-format" type="string" value="%Y-%m-%d"/>
+      <property name="digital-layout" type="uint" value="3"/>
+      <property name="digital-time-font" type="string" value="Sans 12"/>
+    </property>
+    <property name="plugin-13" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-14" type="string" value="actions"/>
+  </property>
+</channel>

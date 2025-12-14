@@ -56,10 +56,15 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# source /etc/bash_completion.d/git
+source /etc/bash_completion.d/git-prompt
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " [\[\033[01;33m\]%s\[\033[00m\]]")\$ ' 
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    # PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 " [%s]")\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -118,9 +123,6 @@ export NVM_DIR="$HOME/.nvm"
 
 alias pip='~/.local/bin/pip3'
 
-[[ -s "/home/owen/.gvm/scripts/gvm" ]] && source "/home/owen/.gvm/scripts/gvm"
-
-alias awspp='AWS_PROFILE=prod'
-alias awssp='AWS_PROFILE=staging'
-alias awstp='AWS_PROFILE=tsnt'
 alias copy='xclip -sel clip'
+alias zed='ZED_DEVICE_ID=0x1f12 zed'
+. "$HOME/.cargo/env"

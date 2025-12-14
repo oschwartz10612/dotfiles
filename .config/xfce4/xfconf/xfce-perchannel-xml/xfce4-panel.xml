@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="xfce4-panel" version="1.0">
   <property name="configver" type="int" value="2"/>
@@ -19,11 +19,13 @@
         <value type="int" value="5"/>
         <value type="int" value="6"/>
         <value type="int" value="8"/>
+        <value type="int" value="9"/>
         <value type="int" value="10"/>
         <value type="int" value="11"/>
         <value type="int" value="12"/>
         <value type="int" value="13"/>
         <value type="int" value="14"/>
+        <value type="int" value="7"/>
       </property>
       <property name="autohide-behavior" type="uint" value="2"/>
     </property>
@@ -44,6 +46,26 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="wi-fi network connection “fios-cj52x” active: fios-cj52x (73%)"/>
+        <value type="string" value="wi-fi network connection “fios-cj52x” active: fios-cj52x (90%)"/>
+        <value type="string" value="wi-fi network connection “fios-cj52x” active: fios-cj52x (71%)"/>
+        <value type="string" value="wi-fi network connection “fios-cj52x” active: fios-cj52x (69%)"/>
+        <value type="string" value="wi-fi network connection “fios-cj52x” active: fios-cj52x (68%)"/>
+        <value type="string" value="wi-fi network connection “fios-cj52x” active: fios-cj52x (72%)"/>
+        <value type="string" value="ethernet network connection “wired connection 2” active&#xA;vpn connection active"/>
+        <value type="string" value="ethernet network connection “wired connection 2” active"/>
+        <value type="string" value="wi-fi network connection “schwartz-wifi” active: schwartz-wifi (50%)&#xA;vpn connection active"/>
+        <value type="string" value="wi-fi network connection “schwartz-wifi” active: schwartz-wifi (51%)&#xA;vpn connection active"/>
+        <value type="string" value="wi-fi network connection “dawghouse” active: dawghouse (68%)&#xA;vpn connection active"/>
+        <value type="string" value="notes"/>
+        <value type="string" value="wi-fi network connection “schwartz-wifi” active: schwartz-wifi (57%)"/>
+        <value type="string" value="wi-fi network connection “schwartz-wifi” active: schwartz-wifi (55%)"/>
+        <value type="string" value="wi-fi network connection “schwartz-wifi” active: schwartz-wifi (56%)"/>
+        <value type="string" value="wi-fi network connection “schwartz-wifi” active: schwartz-wifi (54%)"/>
+        <value type="string" value="wi-fi network connection “schwartz-wifi” active: schwartz-wifi (51%)"/>
+        <value type="string" value="polkit-mate-authentication-agent-1"/>
+        <value type="string" value="clipman"/>
+        <value type="string" value="ethernet network connection “wired connection 1” active"/>
         <value type="string" value="flameshot"/>
         <value type="string" value="system-config-printer"/>
         <value type="string" value="networkmanager applet"/>
@@ -52,6 +74,12 @@
         <value type="string" value="network"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="tray-icon tray app"/>
+        <value type="string" value="privateinternetaccess"/>
+        <value type="string" value="indicator-solaar"/>
+        <value type="string" value="chrome_status_icon_1"/>
+        <value type="string" value="Electrum"/>
+        <value type="string" value="TeamViewer"/>
         <value type="string" value="GoldenDict"/>
         <value type="string" value="vlc"/>
         <value type="string" value="obs"/>
@@ -65,7 +93,8 @@
     <property name="plugin-8" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="show-notifications" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="chromium.instance14106;firefox.instance2272;firefox.instance2416;firefox.instance_1_1174;firefox.instance_1_1640;firefox.instance_1_188;firefox.instance_1_2205;firefox.instance_1_2395;firefox.instance_1_2624;firefox.instance_1_2762;firefox.instance_1_2892;firefox.instance_1_3600;firefox.instance_1_3634;firefox.instance_1_5034;firefox.instance_1_55;firefox.instance_1_56;firefox.instance_1_569;firefox.instance_1_57;firefox.instance_1_58;firefox.instance_1_62;firefox.instance_1_65;firefox.instance_1_69;firefox.instance_1_73;firefox.instance_1_75;firefox.instance_1_82;firefox.instance_1_93;firefox.instance_1_986;vlc"/>
+      <property name="mpris-players" type="string" value="chromium.instance1032726;chromium.instance1189878;chromium.instance14106;chromium.instance1610620;chromium.instance1613784;chromium.instance1624835;chromium.instance184371;chromium.instance2094516;chromium.instance252884;chromium.instance2690854;chromium.instance2949760;chromium.instance3985631;chromium.instance41452;chromium.instance85515;chromium.instance92372;chromium.instance9894;firefox.instance2272;firefox.instance2416;firefox.instance_1_1065;firefox.instance_1_116;firefox.instance_1_1174;firefox.instance_1_1283;firefox.instance_1_1337;firefox.instance_1_1363;firefox.instance_1_14185;firefox.instance_1_1514;firefox.instance_1_1517;firefox.instance_1_15341;firefox.instance_1_1566;firefox.instance_1_1595;firefox.instance_1_1640;firefox.instance_1_1734;firefox.instance_1_1779;firefox.instance_1_1782;firefox.instance_1_18487;firefox.instance_1_18713;firefox.instance_1_188;firefox.instance_1_2023;firefox.instance_1_203;firefox.instance_1_2109;firefox.instance_1_2196;firefox.instance_1_2205;firefox.instance_1_2395;firefox.instance_1_2624;firefox.instance_1_2679;firefox.instance_1_273;firefox.instance_1_2762;firefox.instance_1_2892;firefox.instance_1_294;firefox.instance_1_3105;firefox.instance_1_3521;firefox.instance_1_3600;firefox.instance_1_3634;firefox.instance_1_4204;firefox.instance_1_436;firefox.instance_1_470;firefox.instance_1_5034;firefox.instance_1_55;firefox.instance_1_56;firefox.instance_1_569;firefox.instance_1_57;firefox.instance_1_58;firefox.instance_1_580;firefox.instance_1_62;firefox.instance_1_6291;firefox.instance_1_65;firefox.instance_1_653;firefox.instance_1_66;firefox.instance_1_660;firefox.instance_1_6678;firefox.instance_1_67;firefox.instance_1_68;firefox.instance_1_69;firefox.instance_1_696;firefox.instance_1_70;firefox.instance_1_7079;firefox.instance_1_71;firefox.instance_1_72;firefox.instance_1_73;firefox.instance_1_732;firefox.instance_1_75;firefox.instance_1_76;firefox.instance_1_80;firefox.instance_1_82;firefox.instance_1_86;firefox.instance_1_8690;firefox.instance_1_93;firefox.instance_1_9760;firefox.instance_1_986;vlc;vlc.instance1398588;vlc.instance1398797;vlc.instance1399464;vlc.instance1401389;vlc.instance1401971;vlc.instance1402439;vlc.instance1402773;vlc.instance1837468;vlc.instance1908073;vlc.instance2520981;vlc.instance364911;vlc.instance54022;vlc.instance592035;vlc.instance593174"/>
+      <property name="known-players" type="string" value="Chrome;firefox;vlc"/>
     </property>
     <property name="plugin-10" type="string" value="notification-plugin"/>
     <property name="plugin-11" type="string" value="separator">
@@ -80,5 +109,12 @@
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-14" type="string" value="actions"/>
+    <property name="plugin-9" type="string" value="power-manager-plugin"/>
+    <property name="notes" type="empty">
+      <property name="global" type="empty">
+        <property name="version" type="string" value="1.11.1"/>
+      </property>
+    </property>
+    <property name="plugin-7" type="string" value="cpufreq"/>
   </property>
 </channel>

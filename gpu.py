@@ -13,17 +13,19 @@ from pathlib import Path
 # Configuration file paths
 XORG_CONF_DIR = "/etc/X11/xorg.conf.d"
 NVIDIA_CONF = f"{XORG_CONF_DIR}/10-nvidia-drm-outputclass.conf"
+INTEL_CONF = f"{XORG_CONF_DIR}/10-intel-only.conf"
 LIGHTDM_SETUP = "/etc/lightdm/nvidia.sh"
 LIGHTDM_CONF_D = "/etc/lightdm/lightdm.conf.d"
 LIGHTDM_NVIDIA_CONF = f"{LIGHTDM_CONF_D}/20-nvidia.conf"
 STATE_FILE = "/tmp/gpu-mode.state"
 UDEV_RULES_FILE = "/etc/udev/rules.d/00-remove-nvidia.rules"
 
-# NVIDIA configuration template (BusID will be inserted)
 NVIDIA_CONFIG_TEMPLATE = """Section "OutputClass"
     Identifier "nvidia"
     MatchDriver "nvidia-drm"
     Driver "nvidia"
+    ModulePath "/usr/lib/nvidia/xorg"
+    ModulePath "/usr/lib/xorg/modules" 
 EndSection
 
 Section "ServerLayout"
@@ -56,6 +58,24 @@ Section "Screen"
 EndSection
 """
 
+# Intel-only X.org config to prevent NVIDIA GPU from being used
+INTEL_CONFIG_TEMPLATE = """# Disable auto-adding GPU devices to prevent NVIDIA from interfering
+Section "ServerFlags"
+    Option "AutoAddGPU" "false"
+EndSection
+
+Section "Device"
+    Identifier "Intel Graphics"
+    Driver "modesetting"
+    BusID "{busid}"
+EndSection
+
+Section "Screen"
+    Identifier "Intel Screen"
+    Device "Intel Graphics"
+EndSection
+"""
+
 # udev rules to power down NVIDIA GPU
 UDEV_RULES_CONTENT = """# Remove NVIDIA USB xHCI Host Controller devices, if present
 ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
@@ -70,8 +90,12 @@ ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300"
 ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
 """
 
-def get_nvidia_busid():
-    """Detect NVIDIA GPU BusID from lspci"""
+def get_gpu_busid(gpu_type="nvidia"):
+    """Detect GPU BusID from lspci
+    
+    Args:
+        gpu_type: "nvidia" or "intel"
+    """
     try:
         result = subprocess.run(
             ["lspci", "-nn"],
@@ -80,16 +104,24 @@ def get_nvidia_busid():
             check=True
         )
         for line in result.stdout.splitlines():
-            # Look for NVIDIA VGA or 3D controller
-            if "NVIDIA" in line and ("VGA" in line or "3D" in line):
-                # Extract PCI address (e.g., "01:00.0")
-                pci_addr = line.split()[0]
-                # Convert to X.org BusID format: "PCI:1:0:0"
-                parts = pci_addr.replace(".", ":").split(":")
-                busid = f"PCI:{int(parts[0], 16)}:{int(parts[1], 16)}:{int(parts[2])}"
-                return busid
+            if gpu_type == "nvidia":
+                # Look for NVIDIA VGA or 3D controller
+                if "NVIDIA" in line and ("VGA" in line or "3D" in line):
+                    # Extract PCI address (e.g., "01:00.0")
+                    pci_addr = line.split()[0]
+                    # Convert to X.org BusID format: "PCI:1:0:0"
+                    parts = pci_addr.replace(".", ":").split(":")
+                    busid = f"PCI:{int(parts[0], 16)}:{int(parts[1], 16)}:{int(parts[2])}"
+                    return busid
+            elif gpu_type == "intel":
+                # Look for Intel VGA controller
+                if "Intel" in line and "VGA" in line:
+                    pci_addr = line.split()[0]
+                    parts = pci_addr.replace(".", ":").split(":")
+                    busid = f"PCI:{int(parts[0], 16)}:{int(parts[1], 16)}:{int(parts[2])}"
+                    return busid
     except (subprocess.CalledProcessError, IndexError, ValueError) as e:
-        print(f"Warning: Could not detect NVIDIA BusID: {e}")
+        print(f"Warning: Could not detect {gpu_type} BusID: {e}")
     return None
 
 # LightDM display setup script content
@@ -141,8 +173,13 @@ def switch_to_nvidia():
         run_cmd(["udevadm", "control", "--reload-rules"])
         print("Reloaded udev rules")
 
+    # Remove Intel config if present
+    if os.path.exists(INTEL_CONF):
+        os.remove(INTEL_CONF)
+        print(f"Removed Intel config: {INTEL_CONF}")
+
     # Detect NVIDIA BusID
-    busid = get_nvidia_busid()
+    busid = get_gpu_busid("nvidia")
     if not busid:
         print("Error: Could not detect NVIDIA GPU BusID")
         print("Make sure NVIDIA drivers are installed and the GPU is detected by lspci")
@@ -193,6 +230,21 @@ def switch_to_intel(power_down=False):
         print(f"Removed NVIDIA config: {NVIDIA_CONF}")
     else:
         print("NVIDIA config not found, already using integrated graphics")
+
+    # Detect Intel GPU BusID and create Intel-only config
+    intel_busid = get_gpu_busid("intel")
+    if intel_busid:
+        print(f"Detected Intel GPU at BusID: {intel_busid}")
+        # Create xorg.conf.d directory if it doesn't exist
+        Path(XORG_CONF_DIR).mkdir(parents=True, exist_ok=True)
+        
+        intel_config = INTEL_CONFIG_TEMPLATE.format(busid=intel_busid)
+        with open(INTEL_CONF, 'w') as f:
+            f.write(intel_config)
+        print(f"Created Intel-only config at {INTEL_CONF}")
+    else:
+        print("Warning: Could not detect Intel GPU BusID")
+        print("X.org may still try to use NVIDIA GPU with modesetting driver")
 
     # Remove LightDM display setup script
     if os.path.exists(LIGHTDM_SETUP):
@@ -251,6 +303,10 @@ def show_status():
     else:
         print("  Integrated graphics is active")
         print(f"  NVIDIA config: not present")
+        if os.path.exists(INTEL_CONF):
+            print(f"  Intel config: {INTEL_CONF}")
+        else:
+            print(f"  Intel config: not present")
         print(f"  LightDM setup: not present")
         print(f"  LightDM config: not present")
     

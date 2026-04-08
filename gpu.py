@@ -38,7 +38,12 @@ Section "Device"
     Identifier "nvidia"
     Driver "nvidia"
     BusID "{busid}"
+    Option "TripleBuffer" "False"
+    # Keep Composition Pipeline, but ensure it's not the "Full" version
     Option "ForceCompositionPipeline" "on"
+    Option "ForceFullCompositionPipeline" "off"
+    # Tell the driver to prioritize low latency
+    Option "UseNvKmsCompositionPipeline" "false"
 EndSection
 
 Section "Screen"

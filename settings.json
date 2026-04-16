@@ -1,0 +1,82 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+	"agent_ui_font_size": 20.0,
+ "agent_buffer_font_size": 20.0,
+ "helix_mode": false,
+ "edit_predictions": {
+  "provider": "copilot",
+  "mode": "eager"
+ },
+ "ssh_connections": [
+		{
+			"host": "192.168.86.47",
+			"args": [],
+			"projects": [
+				{
+					"paths": ["/home/owen/fossorial/andriod"],
+				},
+			],
+		},
+	],
+	"terminal": {
+		"font_size": 18.0,
+	},
+	"remove_trailing_whitespace_on_save": false,
+	"ensure_final_newline_on_save": false,
+	"ui_font_family": ".ZedSans",
+	"icon_theme": "Catppuccin Latte",
+	"minimap": {
+		"show": "always",
+	},
+	"agent": {
+		"tool_permissions": {
+   "default": "allow"
+  },
+  "inline_assistant_model": {
+			"provider": "copilot_chat",
+			"model": "claude-sonnet-4.6",
+		},
+		"default_profile": "write",
+		"profiles": {},
+		"default_model": {
+			"effort": "medium",
+   "enable_thinking": true,
+   "provider": "copilot_chat",
+			"model": "claude-sonnet-4.6",
+		},
+		"model_parameters": [],
+	},
+	"git": {
+		"inline_blame": {
+			"enabled": false,
+		},
+	},
+	"vim_mode": true,
+	"format_on_save": "off",
+	"ui_font_size": 20.0,
+	"buffer_font_size": 20.0,
+	"vim": {
+		"use_system_clipboard": "on_yank",
+	},
+	"theme": {
+		"mode": "dark",
+		"light": "One Light",
+		"dark": "One Dark",
+	},
+	"tabs": { "file_icons": true },
+	"tab_size": 4,
+	"hard_tabs": true,
+	"window_decorations": "server",
+	"languages": {
+		"Kotlin": {
+			"language_servers": ["kotlin-lsp"],
+		},
+	},
+}
